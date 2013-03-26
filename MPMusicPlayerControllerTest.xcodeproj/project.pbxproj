@@ -25,6 +25,8 @@
 		9A4E88B817011D6700B27755 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4E888D17011D6700B27755 /* Foundation.framework */; };
 		9A4E88C017011D6700B27755 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A4E88BE17011D6700B27755 /* InfoPlist.strings */; };
 		9A4E88C317011D6700B27755 /* MPMusicPlayerControllerTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4E88C217011D6700B27755 /* MPMusicPlayerControllerTestTests.m */; };
+		9A4E88CD17011D8700B27755 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4E88CC17011D8700B27755 /* MediaPlayer.framework */; };
+		9A4E88D01701255C00B27755 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A4E88CF1701255C00B27755 /* Utilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,9 @@
 		9A4E88BF17011D6700B27755 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9A4E88C117011D6700B27755 /* MPMusicPlayerControllerTestTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPMusicPlayerControllerTestTests.h; sourceTree = "<group>"; };
 		9A4E88C217011D6700B27755 /* MPMusicPlayerControllerTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPMusicPlayerControllerTestTests.m; sourceTree = "<group>"; };
+		9A4E88CC17011D8700B27755 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		9A4E88CE1701255C00B27755 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		9A4E88CF1701255C00B27755 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A4E88CD17011D8700B27755 /* MediaPlayer.framework in Frameworks */,
 				9A4E888C17011D6700B27755 /* UIKit.framework in Frameworks */,
 				9A4E888E17011D6700B27755 /* Foundation.framework in Frameworks */,
 				9A4E889017011D6700B27755 /* CoreGraphics.framework in Frameworks */,
@@ -92,6 +98,7 @@
 		9A4E887F17011D6700B27755 = {
 			isa = PBXGroup;
 			children = (
+				9A4E88CC17011D8700B27755 /* MediaPlayer.framework */,
 				9A4E889117011D6700B27755 /* MPMusicPlayerControllerTest */,
 				9A4E88BB17011D6700B27755 /* MPMusicPlayerControllerTestTests */,
 				9A4E888A17011D6700B27755 /* Frameworks */,
@@ -122,6 +129,8 @@
 		9A4E889117011D6700B27755 /* MPMusicPlayerControllerTest */ = {
 			isa = PBXGroup;
 			children = (
+				9A4E88CE1701255C00B27755 /* Utilities.h */,
+				9A4E88CF1701255C00B27755 /* Utilities.m */,
 				9A4E889A17011D6700B27755 /* AppDelegate.h */,
 				9A4E889B17011D6700B27755 /* AppDelegate.m */,
 				9A4E88A317011D6700B27755 /* MainViewController.h */,
@@ -283,6 +292,7 @@
 				9A4E889C17011D6700B27755 /* AppDelegate.m in Sources */,
 				9A4E88A517011D6700B27755 /* MainViewController.m in Sources */,
 				9A4E88A817011D6700B27755 /* FlipsideViewController.m in Sources */,
+				9A4E88D01701255C00B27755 /* Utilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +412,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MPMusicPlayerControllerTest/MPMusicPlayerControllerTest-Prefix.pch";
 				INFOPLIST_FILE = "MPMusicPlayerControllerTest/MPMusicPlayerControllerTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -413,6 +424,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MPMusicPlayerControllerTest/MPMusicPlayerControllerTest-Prefix.pch";
 				INFOPLIST_FILE = "MPMusicPlayerControllerTest/MPMusicPlayerControllerTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
