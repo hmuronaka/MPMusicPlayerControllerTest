@@ -14,7 +14,7 @@
 
 @property(nonatomic, strong) MPMusicPlayerController* musicPlayer;
 @property(nonatomic, strong) NSTimer* cycleTimer;
-
+@property(nonatomic, strong) MPMediaItemCollection* mediaItemCollection;
 @property(nonatomic, strong) NSArray* rowTitleArray;
 
 @end
@@ -179,6 +179,7 @@
 
 - (void) mediaPicker: (MPMediaPickerController *) mediaPicker didPickMediaItems: (MPMediaItemCollection *) aMediaItemCollection {
     [self.musicPlayer setQueueWithItemCollection:aMediaItemCollection];
+    self.mediaItemCollection = aMediaItemCollection;
     [mediaPicker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -194,12 +195,20 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.rowTitleArray.count;
+    switch(section)
+    {
+        case 0:
+            return self.rowTitleArray.count;
+        case 1:
+            return (self.mediaItemCollection == nil) ? 0 : self.mediaItemCollection.count;
+        default:
+            return 0;
+    }
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -210,18 +219,36 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
-    [cell.textLabel setText:[self.rowTitleArray objectAtIndex:indexPath.row]];
     
-    NSString* detailText = @"";
-    if( indexPath.row == 0 )
+    if( indexPath.section == 0)
     {
-        detailText = [self playStatusToStr];
+        [cell.textLabel setText:[self.rowTitleArray objectAtIndex:indexPath.row]];
+        
+        NSString* detailText = @"";
+        if( indexPath.row == 0 )
+        {
+            detailText = [self playStatusToStr];
+        }
+        else if( indexPath.row == 1 )
+        {
+            detailText = [self titleOfNowPlaying];
+        }
+        [cell.detailTextLabel setText:detailText];
     }
-    else if( indexPath.row == 1 )
+    else if( indexPath.section == 1)
     {
-        detailText = [self titleOfNowPlaying];
+        MPMediaItem* item = [self.mediaItemCollection.items objectAtIndex:indexPath.row];
+        NSString* value = @"";
+        if( item != nil )
+        {
+            value = [item valueForKey:MPMediaItemPropertyTitle];
+        }
+        else
+        {
+            value = @"item is nil";
+        }
+        [cell.textLabel setText:value];
     }
-    [cell.detailTextLabel setText:detailText];
     return cell;
 }
 
@@ -247,16 +274,18 @@
         default:
             return [NSString stringWithFormat:@"%d", state];
     }
-    return @"";
 }
 
 -(NSString*)titleOfNowPlaying
 {
     if( self.musicPlayer == nil ) {
-        return @"nil;";
+        return @"music Player is nil;";
     }
     
     MPMediaItem* item = self.musicPlayer.nowPlayingItem;
+    if( item == nil ) {
+        return @"item is nil";
+    }
     NSString* title = [item valueForKey:MPMediaItemPropertyTitle];
     return title;
 }
@@ -275,6 +304,15 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if( indexPath.section == 1)
+    {
+        MPMediaItem* item = [self.mediaItemCollection.items objectAtIndex:indexPath.row];
+        self.musicPlayer.nowPlayingItem = item;
+        [self.tableView reloadData];
+    }
+}
 
 
 @end
